@@ -22,7 +22,7 @@ class PolynomTest {
 			try
 			{
 				Polynom wrong=new Polynom (wrongPolynom[i]);
-				fail();// if the wrong polynom was accepted
+				fail("The polynom(string) accepted the wrong polynom, its not good!");// if the wrong polynom was accepted
 			}
 			catch (Exception e) 
 			{
@@ -46,7 +46,17 @@ class PolynomTest {
 
 	@Test
 	void testAddPolynom_able() {
-
+		String [] p1= {"3x^2-6x^3+9x-2","-4x^2-5","-x^3-x^3+5x-4","4x-2+3x^4"};
+		String [] p2= {"x+5x-5","-4x^2-5","x^2-1+0-4x^4","2-3x^4-4x"};
+		String [] polynomExpected= {"-6.0x^3+3.0x^2+15.0x-7.0","-8.0x^2-10.0","-4.0x^4-2.0x^3+1.0x^2+5.0x-5.0","0.0"};
+		for (int i = 0; i < p1.length; i++) 
+		{
+			Polynom actual = new Polynom (p1[i]);
+			Polynom addBy = new Polynom (p2[i]);
+			Polynom expected = new Polynom (polynomExpected[i]);
+			actual.add(addBy);
+			assertEquals(expected.toString(), actual.toString());
+		}
 	}
 
 	@Test
@@ -87,6 +97,7 @@ class PolynomTest {
 				actual.add(reset);
 				assertEquals(actual,expected);
 				break;
+				default:
 			}
 		}
 	}
@@ -118,7 +129,10 @@ class PolynomTest {
 
 	@Test
 	void testCopy() {
-		fail("Not yet implemented");
+		Polynom actual=new Polynom ("5x^2+4x-3");
+		Polynom expected=new Polynom ("5x^2+4x-3");
+		actual.copy();
+		assertEquals(expected, actual);
 	}
 
 	@Test
