@@ -46,9 +46,9 @@ class PolynomTest {
 
 	@Test
 	void testAddPolynom_able() {
-		String [] p1= {"3x^2-6x^3+9x-2","-4x^2-5","-x^3-x^3+5x-4","4x-2+3x^4"};
-		String [] p2= {"x+5x-5","-4x^2-5","x^2-1+0-4x^4","2-3x^4-4x"};
-		String [] polynomExpected= {"-6.0x^3+3.0x^2+15.0x-7.0","-8.0x^2-10.0","-4.0x^4-2.0x^3+1.0x^2+5.0x-5.0","0.0"};
+		String [] p1= {"3x^2-6x^3+9x-2","-4x^2-5","-x^3-x^3+5x-4","4x-2+3x^4","1.1x"};
+		String [] p2= {"x+5x-5","-4x^2-5","x^2-1+0-4x^4","2-3x^4-4x","2.3x"};
+		String [] polynomExpected= {"-6.0x^3+3.0x^2+15.0x-7.0","-8.0x^2-10.0","-4.0x^4-2.0x^3+1.0x^2+5.0x-5.0","0","3.4x"};
 		for (int i = 0; i < p1.length; i++) 
 		{
 			Polynom actual = new Polynom (p1[i]);
@@ -97,14 +97,24 @@ class PolynomTest {
 				actual.add(reset);
 				assertEquals(actual,expected);
 				break;
-				default:
+			default:
 			}
 		}
 	}
 
 	@Test
 	void testSubstract() {
-		fail("Not yet implemented");
+		String [] p1= {"3x^2-6x^3+9x-2","-4x^2-5","-x^3-x^3+5x-4","4x-2+3x^4","2.2x"};
+		String [] p2= {"x+5x-5","4x^2-5-x","x^2-1+0-4x^4-x","-2+3x^4+4x","1.1x"};
+		String [] polynomExpected= {"-6.0x^3+3.0x^2+3.0x+3.0","-8.0x^2+1.0x","4.0x^4-2.0x^3-1.0x^2+6.0x-3.0","0","1.1x"};
+		for (int i = 0; i < p1.length; i++) 
+		{
+			Polynom actual = new Polynom (p1[i]);
+			Polynom subBy = new Polynom (p2[i]);
+			Polynom expected = new Polynom (polynomExpected[i]);
+			actual.substract(subBy);
+			assertEquals(expected.toString(), actual.toString());
+		}
 	}
 
 	@Test
@@ -119,25 +129,47 @@ class PolynomTest {
 
 	@Test
 	void testIsZero() {
-		fail("Not yet implemented");
+		String [] zero= {"0","0x^2","2x-2x+1-1"};
+		String [] notZero= {"5x^2","5x","5"};
+		boolean t=true;
+		boolean f=false;
+		for (int i = 0; i < zero.length; i++)
+		{
+			Polynom actual1=new Polynom (zero[i]);
+			Polynom actual2=new Polynom (notZero[i]);
+			boolean tExpected=actual1.isZero();
+			boolean fExpected=actual2.isZero();
+			assertEquals(t,tExpected);
+			assertEquals(f,fExpected);
+		}
 	}
 
 	@Test
 	void testRoot() {
-		fail("Not yet implemented");
 	}
 
 	@Test
 	void testCopy() {
 		Polynom actual=new Polynom ("5x^2+4x-3");
-		Polynom expected=new Polynom ("5x^2+4x-3");
-		actual.copy();
+		//copy
+		Polynom_able expected = actual.copy();
 		assertEquals(expected, actual);
+		//deep copy
+		actual.add(new Monom("x^2"));
+		assertNotEquals(expected, actual); //notEquals
 	}
 
 	@Test
 	void testDerivative() {
-		fail("Not yet implemented");
+		String [] polynomActual= {"2.2x^3+x^2-x+3","-4x^2-5.6","7x","x^2-1+0-5x^4","3.3x-4.4+2.2x-10.5x^5"};
+		String [] polynomExpected= {"6.6x^2+2.0x-1.0","-8.0x","7.0","-20.0x^3+2.0x","52.5x^4+5.5"};
+		for (int i = 0; i < polynomExpected.length; i++)
+		{
+			Polynom actual=new Polynom (polynomActual[i]);
+			Polynom expected=new Polynom (polynomActual[i]);
+			actual.derivative();
+			assertEquals(expected, actual);
+		}
 	}
 
 	@Test
@@ -154,20 +186,11 @@ class PolynomTest {
 	void testMultiplyMonom() {
 		fail("Not yet implemented");
 	}
-
-	@Test
-	void testPolynomOrder() {
-		fail("Not yet implemented");
-	}
-
 	@Test
 	void testToString() {
-		fail("Not yet implemented");
+			Polynom actual=new Polynom ("2-4x^3+2.2x+4x^2-4x^1+3x^10");
+			Polynom expected=new Polynom ("3.0x^10-4.0x^3+4.0x^2-4.0x+2.0");
+			actual.toString();
+			assertEquals(expected, actual);
 	}
-
-	@Test
-	void testInitFromString() {
-		fail("Not yet implemented");
-	}
-
 }
