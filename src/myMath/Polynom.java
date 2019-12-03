@@ -279,7 +279,7 @@ public class Polynom implements Polynom_able{
 		Iterator <Monom> iteratorOnThis= this.iteretor();
 		while ( iteratorOnThis.hasNext() )
 		{
-			p1.Polynom_arr.add(iteratorOnThis.next());
+			p1.Polynom_arr.add(new Monom(iteratorOnThis.next()));
 		}
 		return p1;
 	}
