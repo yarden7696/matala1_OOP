@@ -142,7 +142,6 @@ public class Monom implements function {
 		double new_Cofficient = 0;
 		if (m.get_power() == this.get_power()) {
 			new_Cofficient = m.get_coefficient() + this.get_coefficient();
-
 			this.set_coefficient(new_Cofficient);
 		} else {
 			throw new RuntimeException(" The powers are different ! ");
@@ -207,7 +206,7 @@ public class Monom implements function {
 		if(m.isZero()&&this.isZero())return true;
 		if(m==null||this==null)return false;
 		double different= Math.abs(m.get_coefficient()-this.get_coefficient());
-		return ((m.get_coefficient()==this.get_coefficient())&&(m.get_power()==this.get_power())&&different<=Monom.EPSILON);
+		return ((m.get_power()==this.get_power())&&different<=Monom.EPSILON);
 	}
 	
 	

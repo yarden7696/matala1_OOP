@@ -80,10 +80,7 @@ class MonomTest {
 				assertEquals( res[i][j], re);
 			
 			}
-			
-			
-		}
-		
+		}	
 	}
 
 	@Test
