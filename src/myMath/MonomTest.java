@@ -8,7 +8,7 @@ class MonomTest {
 
 	@Test
 	void testGetComp() {
-		fail("Not yet implemented");
+	
 	}
 
 	@Test
