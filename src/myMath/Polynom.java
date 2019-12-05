@@ -195,7 +195,6 @@ public class Polynom implements Polynom_able{
 	@Override
 	public boolean equals(Object p1)
 	{
-
 		Iterator <Monom> iterthis = this.iteretor();
 		Iterator <Monom> iterp1 = ((Polynom) p1).iteretor();
 		while(iterthis.hasNext()&&iterp1.hasNext())
@@ -344,7 +343,6 @@ public class Polynom implements Polynom_able{
 		{
 			Polynom_arr.get(i).multipy(m1);
 		}
-		
 	}
 /**
  * The function order the Polynom from the highest power to the lower power and add monoms
