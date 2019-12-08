@@ -212,7 +212,24 @@ class PolynomTest {
 	}
 	@Test
 	void testArea() {
-		fail("Not yet implemented");
+		String [] polynomActual= {"2x^2-x+1","x^4-2x^2+2","x+2"};
+		double [] expected1= {3.334333999999998,3.0666666666666007,3.9990000000000014};
+		double [] expected2= {7.174167000000351,3.5388353333335814,0.500499999999945};
+		double [] expected3= {1.1661670000000013,1.5338333333332965,2.4995000000000007};
+		double [] expected4= {0.0,0.0,0.0,0.0};
+		double eps=0.001;
+		for (int i = 0; i < expected1.length; i++) 
+		{
+			Polynom p=new Polynom(polynomActual[i]);
+			double actual1 = p.area(-1,1,eps);
+			double actual2 = p.area(-2,-1,eps);
+			double actual3 = p.area(0,1,eps);
+			double actual4 = p.area(1,0,eps);
+			assertEquals(expected1[i], actual1);
+			assertEquals(expected2[i], actual2);
+			assertEquals(expected3[i], actual3);
+			assertEquals(expected4[i], actual4);
+		}
 	}
 	@Test
 	void testMultiplyMonom() {
