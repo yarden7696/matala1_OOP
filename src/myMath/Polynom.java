@@ -75,10 +75,10 @@ public class Polynom implements Polynom_able{
 				}
 			}
 		}
-		
-		
+
+
 		polynomOrder ();
-		
+
 	}
 	/**
 	 * The function get number that represented by x , place it in this Polynom and return
@@ -86,7 +86,7 @@ public class Polynom implements Polynom_able{
 	 * @param x represent the number that the function get.
 	 */
 	@Override
-	
+
 	public double f(double x)
 	{
 		double ans=0;
@@ -111,16 +111,16 @@ public class Polynom implements Polynom_able{
 		{
 			this.Polynom_arr.add(iteratep1.next());
 		}
-        polynomOrder();
+		polynomOrder();
 	} 
 
-/**
- * The function add m1 to this polynom . the function keep is sorted from the highest power to the 
- * lower power with one monom from each power. 
- * @param m1 represent monom . 
- */
+	/**
+	 * The function add m1 to this polynom . the function keep is sorted from the highest power to the 
+	 * lower power with one monom from each power. 
+	 * @param m1 represent monom . 
+	 */
 	@Override
-	 public void add(Monom m1) {
+	public void add(Monom m1) {
 		if(!m1.equals(Monom.ZERO)) {
 			if(Polynom_arr.isEmpty())
 			{
@@ -141,15 +141,15 @@ public class Polynom implements Polynom_able{
 				}
 				if(!flag)Polynom_arr.add(m1);
 			}
-			
+
 		}
 		polynomOrder();
 	}
-	
-/**
- * The function substract p1 from this polynom.
- * @param p1 represent Polynom_able.
- */
+
+	/**
+	 * The function substract p1 from this polynom.
+	 * @param p1 represent Polynom_able.
+	 */
 	@Override
 	public void substract(Polynom_able p1) {
 		Iterator <Monom> iterp1 = p1.iteretor();
@@ -163,7 +163,7 @@ public class Polynom implements Polynom_able{
 		polynomOrder();
 	}
 
-	
+
 	/**
 	 * The function multiply p1 with this polynom.
 	 * @param p1 represent polynom_able.
@@ -187,7 +187,7 @@ public class Polynom implements Polynom_able{
 		polynomOrder();
 	}
 
-	
+
 	/**
 	 * The Function check if this polynom is logically equals to p1.
 	 * @param p1 represent polynom_able.
@@ -213,7 +213,7 @@ public class Polynom implements Polynom_able{
 	public boolean isZero() 
 	{
 		if(this.Polynom_arr.isEmpty())return true;
-		
+
 		else
 		{
 			for(int i=0;i<Polynom_arr.size();i++)
@@ -223,15 +223,15 @@ public class Polynom implements Polynom_able{
 			return true;
 		}
 	}
-	
-/**
- * The function calculates a Polynomial root by using the intermediate value , when the function is 
- * continuous  and f(x0)* f(x1) <0 else throw exception.
- * The root that the function returns is x (about eps) when f(x)=0.    
- * @param x0 represent start or end point.
- * @param x1 represent start or end point.
- * @param eps represent positive value (approximation).
- */
+
+	/**
+	 * The function calculates a Polynomial root by using the intermediate value , when the function is 
+	 * continuous  and f(x0)* f(x1) <0 else throw exception.
+	 * The root that the function returns is x (about eps) when f(x)=0.    
+	 * @param x0 represent start or end point.
+	 * @param x1 represent start or end point.
+	 * @param eps represent positive value (approximation).
+	 */
 
 	@Override
 	public double root(double x0, double x1, double eps)
@@ -267,10 +267,10 @@ public class Polynom implements Polynom_able{
 			throw new RuntimeException("No root");
 		}
 	}
-/**
- * The function create a deep copy of this Polynom.
- * @return Polynom that is deep copy of this Polynom.
- */
+	/**
+	 * The function create a deep copy of this Polynom.
+	 * @return Polynom that is deep copy of this Polynom.
+	 */
 	@Override
 	public Polynom_able copy() 
 	{
@@ -282,23 +282,23 @@ public class Polynom implements Polynom_able{
 		}
 		return p1;
 	}
-	
-/**
- * The function compute a new Polynom which is the derivative of this Polynom.
- * @return the new Polynom that is the derivative of this Polynom.
- */
+
+	/**
+	 * The function compute a new Polynom which is the derivative of this Polynom.
+	 * @return the new Polynom that is the derivative of this Polynom.
+	 */
 	@Override
 	public Polynom_able derivative() {
-		
-        Polynom p2= new Polynom ();
-        
+
+		Polynom p2= new Polynom ();
+
 		for( int i=0 ; i<Polynom_arr.size() ; i++)
 		{
 			p2.Polynom_arr.add(this.Polynom_arr.get(i).derivative());
 		}
 		return p2;
 	}
-      
+
 	/**
 	 * The function calculates the area of the Polynomial by using Riemann sum .
 	 * if x0 > x1 the area is 0.
@@ -314,14 +314,14 @@ public class Polynom implements Polynom_able{
 		if(x0>=x1)return 0; // the area is right from x0 and left from x1
 		else
 		{
-			while((x0<x1))
+			while((x0<=x1))
 			{
-				if(Math.abs(f(x0))>eps)
-				sum+=eps*f(x0);
+				if(f(x0)>0)
+					sum+=eps*f(x0);
 				x0+=eps;
 			}
 		}
-		return Math.abs(sum);
+		return sum;
 	}
 
 	/**
@@ -331,8 +331,8 @@ public class Polynom implements Polynom_able{
 	public Iterator<Monom> iteretor() {
 		return Polynom_arr.iterator();
 	}
-	
-	
+
+
 	/**
 	 * The function multiply m1 with this Polynom.
 	 * @param m1 represent monom.
@@ -344,10 +344,10 @@ public class Polynom implements Polynom_able{
 			Polynom_arr.get(i).multipy(m1);
 		}
 	}
-/**
- * The function order the Polynom from the highest power to the lower power and add monoms
- *  with same power.
- */
+	/**
+	 * The function order the Polynom from the highest power to the lower power and add monoms
+	 *  with same power.
+	 */
 	public void polynomOrder (){
 		int n= this.Polynom_arr.size();
 		for (int i = 0; i < n-1; i++) 
@@ -380,9 +380,9 @@ public class Polynom implements Polynom_able{
 
 		}
 	}
-/**
- * The function return String that represent this Polynom .
- */
+	/**
+	 * The function return String that represent this Polynom .
+	 */
 	public String toString()
 	{
 		String ans="";
@@ -394,10 +394,11 @@ public class Polynom implements Polynom_able{
 		}
 		return ans;
 	}
-@Override
-public function initFromString(String s) {
-	// TODO Auto-generated method stub
-	return null;
-}
+	@Override
+	public function initFromString(String s) {
+		function p=new Polynom (s);
+		return p;
+	}
+
 }
 
