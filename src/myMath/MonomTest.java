@@ -64,24 +64,29 @@ class MonomTest {
 	@Test
 	void testF() {
 	
+
 		int [][] monom = {{3,5}, {1,2} ,{-6,1}, {0,2}, {8,0}, {-2,3}};
 		int [] x = {0,1,-2,2,10};
-		int [] [] res = {{0,3,-96,96,300000},{0,1,4,4,100}, {0,-6,12,-12,-60},{0,0,0,8,0},			
-		                 {0,-2,16,-16,-2000}};
-				
+		double [] [] res = {{0.0,3.0,-96.0,96.0,300000.0},{0.0,1.0,4.0,4.0,100.0},
+				{0.0,-6.0,12.0,-12.0,-60.0},{0.0,0.0,0.0,0.0,0.0},{8.0,8.0,8.0,8.0,8.0},{0.0,-2.0,16.0,-16.0,-2000.0}};				
 		
 		for(int i=0; i<monom.length ;i++)
 		{
+			Monom m= new Monom(monom[i][0],monom[i][1]);
+			System.out.println(m.toString());
 			for(int j=0; j<x.length; j++) 
 			{
-				Monom m= new Monom(monom[i][0],monom[i][1]);
-				double re=m.f(j);
-				
-				assertEquals( res[i][j], re);
-			
+				double re=m.f(x[j]);
+				System.out.println(+x[j]+": expection : " + res[i][j] + " actual : " +re );
+				 assertEquals( res[i][j], re);
+		
 			}
-		}	
-	}
+			
+			
+		}
+		
+	}	
+	
 
 	@Test
 	void testIsZero() {
@@ -99,18 +104,20 @@ class MonomTest {
 	@Test
 	void testMonomString() {
      
-	String [] monomActual= {"8x^0","-7x^2","x^5","1.2x","45.56x^65","0x","9","7.3x^8","7x^3"};
-    String [] monomExpected = {"8.0","-7.0^2","1.0x^5","1.2x","45.65x^65","0.0","9.0",
-		
-     "7.3x^8","7.0x^3"};
-    
+
+		String [] monomActual= {"8x^0","-7x^2","x^5","1.2x","45.56x^65","0x","9","7.3x^8","7x^3"};
+	    String [] monomExpected = {"8.0","-7.0x^2","1.0x^5","1.2x","45.56x^65","0.0","9.0",
+			
+	     "7.3x^8","7.0x^3"};
+	    
+	    
     for(int i=0; i<monomActual.length; i++)
     {
     	Monom actual= new Monom(monomActual[i]);
-    	Monom expected = new Monom (monomExpected[i]);
-    	assertEquals(expected.toString(),actual.toString());
+    
+    	assertEquals(monomExpected[i],actual.toString());
     }
-		String [] wrongMo = {"bx^3","3x^-3","xt^3","5x^0.5","-7X^2","3^2","4x^-6","--3x^2",
+		 String [] wrongMo = {"bx^3","3x^-3","xt^3","5x^0.5","-7X^2","3^2","4x^-6","--3x^2",
 				"4x^-3.5"};
 		for(int i=0; i<wrongMo.length; i++)
 		{
@@ -124,7 +131,7 @@ class MonomTest {
 			{
 				e.printStackTrace();
 			}
-		}
+		} 
 		}
 	
 
