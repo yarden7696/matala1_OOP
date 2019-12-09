@@ -27,6 +27,7 @@ public class ComplexFunction implements complex_function {
 		this.left = left;
 		this.right = right;
 		this.operation=Operation.valueOf(operation);
+		if(this.operation.name()=="Error")throw new RuntimeException("Illegal Operation");
 
 		
 	}
@@ -66,6 +67,9 @@ public class ComplexFunction implements complex_function {
 
 		case "None" :
 			return this.left().f(x);
+		case "Error":
+			throw new RuntimeException("Illegal Operation");
+			
 
 		default: //case "Error"
 			throw new RuntimeException("Illegal Operation");
@@ -262,7 +266,7 @@ public class ComplexFunction implements complex_function {
 	public static void main(String[] args) {
 
 		Polynom p3 = new Polynom("x+3");
-		ComplexFunction cf3 = new ComplexFunction("Plus",p3,p3);
+		ComplexFunction cf3 = new ComplexFunction("Error",p3,p3);
 //		System.out.println("1:"+cf3);
 //		ComplexFunction cf4 = new ComplexFunction("Plus", p3,p3); 
 //		System.out.println("2:"+cf4);
@@ -271,8 +275,8 @@ public class ComplexFunction implements complex_function {
 //		cf3.plus(cf4);
 //		System.out.println("4:"+cf3);//not good..need to check
 		System.out.println(cf3);
-		cf3.plus(cf3);
-		System.out.println(cf3);
+//		cf3.plus(cf3);
+//		System.out.println(cf3);
 		
 		
 //		System.out.println(cf4);
