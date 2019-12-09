@@ -64,14 +64,14 @@ public class Monom implements function {
 	}
 
 	// ***************** add your code below **********************
-	
+
 	/**
 	 * The function get String that represent monom and build monom 
 	 * @param s is a string that represent monom
 	 * @throws ArithmeticException when the power is negative or the power is fraction or invalid letters 
 	 * throughout the string . also, monom with the form a^b (a,b Integers) is invalid.
 	 */
-	
+
 	public Monom(String s) throws ArithmeticException {
 		int flag = 0;
 		boolean isNegative = false, foundNumber = false;
@@ -128,30 +128,46 @@ public class Monom implements function {
 			x *= -1.0;
 		}
 
+		if(x==0) 
+		{
+			z=0;	
+		}
+
 		this.set_coefficient(x);
 		this.set_power(z);
 
 	}
 
-	
+
 	/**
 	 * add m to this Monom
 	 * @param m represent monom
 	 */
 	public void add(Monom m) {
 		double new_Cofficient = 0;
+
 		if (m.get_power() == this.get_power()) {
 			new_Cofficient = m.get_coefficient() + this.get_coefficient();
+
 			this.set_coefficient(new_Cofficient);
-		} else {
+			if(new_Cofficient == 0)
+			{
+				this.set_power(0);
+			}
+
+		}
+		else 
+		{
 			throw new RuntimeException(" The powers are different ! ");
 		}
-
 	}
-/**
- * multiply d with this monom
- * @param d represent monom
- */
+
+
+
+	/**
+	 * multiply d with this monom
+	 * @param d represent monom
+	 */
 	public void multipy(Monom d) {
 		double co = 0;
 		int po = 0;
@@ -180,9 +196,9 @@ public class Monom implements function {
 		this.set_coefficient(co);
 		this.set_power(po);
 	}
-/**
- * The function return String that represent this monom 
- */
+	/**
+	 * The function return String that represent this monom 
+	 */
 	public String toString() {
 		if (_power == 0) {
 			return Double.toString(_coefficient);
@@ -195,21 +211,27 @@ public class Monom implements function {
 		ans += "x^" + Integer.toString(_power);
 		return ans;
 	}
-	
+
 	/**
 	 * The function check if this monom equal to m
 	 * @param m represent monom
 	 * @return true if they equal and false if they not
 	 */
-	
-	public boolean equals (Monom m) {
-		if(m.isZero()&&this.isZero())return true;
-		if(m==null||this==null)return false;
-		double different= Math.abs(m.get_coefficient()-this.get_coefficient());
-		return ((m.get_power()==this.get_power())&&different<=Monom.EPSILON);
+
+	public boolean equals (Object m) {
+		if( m instanceof Monom) 
+		{
+			Monom newM= (Monom)m;
+			if(newM.isZero()&&this.isZero())return true;
+			if(newM==null||this==null)return false;
+			double different= Math.abs(newM.get_coefficient()-this.get_coefficient());
+
+			return ((newM.get_coefficient()==this.get_coefficient())&&(newM.get_power()==this.get_power())&&different<=Monom.EPSILON);
+		}
+		return false;
 	}
-	
-	
+
+
 	// you may (always) add other methods.
 
 	// ****************** Private Methods and Data *****************
@@ -232,16 +254,29 @@ public class Monom implements function {
 	private double _coefficient;
 	private int _power;
 
-	@Override
-	public function initFromString(String s) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	/**
+	 * this function become the monom string to a object function
+	 */
 
 	@Override
+	public function initFromString(String s) {
+
+		function func = new Monom(s);
+		return func;
+
+	}
+
+
+	/**
+	 * this function create a new monom of this monom
+	 */
+	@Override
 	public function copy() {
-		// TODO Auto-generated method stub
-		return null;
+
+		function func = new Monom( this.get_coefficient() , this.get_power() );
+		return func;
+
+
 	}
 
 }
