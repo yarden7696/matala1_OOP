@@ -98,11 +98,10 @@ public class ComplexFunction implements complex_function {
 			int start=s.indexOf('(');// index of open '('
 			int end=s.indexOf(')');// index of close ')'
 			String op = s.substring(0, start); // save operation
-			s=s.substring(start+1,end);
 			int comma=s.indexOf(','); // index of ','
-			function l=initFromString(s.substring(0, comma)); // recursive call of left function
-			function r=initFromString(s.substring(comma+1)); // recurcive call of right function
-			f=f= new ComplexFunction(op,l,r);
+			function l=initFromString(s.substring(start+1, comma)); // recursive call of left function
+			function r=initFromString(s.substring(comma+1,s.length()-1)); // recurcive call of right function
+			f=new ComplexFunction(op,l,r);
 		}
 				return f;
 	}
@@ -318,7 +317,7 @@ public class ComplexFunction implements complex_function {
 		//			System.out.println(cf5);
             function cff = new ComplexFunction();
             System.out.println(cff);
-           function cff2 = cff.initFromString("Plus(x,2x)");
+           function cff2 = cff.initFromString("Plus(x,Plus(2x,x))");
            System.out.println(cff2);
 
 	}
