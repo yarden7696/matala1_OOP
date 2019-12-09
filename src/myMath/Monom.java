@@ -73,6 +73,8 @@ public class Monom implements function {
 	 */
 
 	public Monom(String s) throws ArithmeticException {
+		
+		s=removeSpace(s);
 		int flag = 0;
 		boolean isNegative = false, foundNumber = false;
 		double x = 0, y = 0;
@@ -279,4 +281,11 @@ public class Monom implements function {
 
 	}
 
+	
+	 private String removeSpace(String str) 
+    { 
+        str = str.replaceAll("\\s",""); 
+        return str; 
+    } 
+  
 }

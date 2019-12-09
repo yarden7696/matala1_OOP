@@ -13,7 +13,7 @@ class PolynomTest {
 
 	@Test
 	void testPolynomString() {
-		String [] polynomActual= {"4x+5x^2","-2-5x^4+6.4x","0x-0+4x^20","2x+3x"};
+		String [] polynomActual= {"4 x +5x ^2","-2-5x^4+6.4x","0x-0+4x^20","2x+3x"};
 		String [] polynomExpected= {"4.0x+5.0x^2","-2.0-5.0x^4+6.4x","4x^20","5x"};
 		for (int i = 0; i < polynomExpected.length; i++) 
 		{

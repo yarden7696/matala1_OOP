@@ -9,21 +9,6 @@ import myMath.Monom;
 class MonomTest {
 
 	@Test
-	void testGetComp() {
-	
-	}
-
-	@Test
-	void testMonomDoubleInt() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testMonomMonom() {
-		fail("Not yet implemented");
-	}
-
-	@Test
 	void testGet_coefficient() {
 		
 		 int [] coefficient= {0,1,2,3,4,5,6,7,11};
@@ -107,7 +92,7 @@ class MonomTest {
 	void testMonomString() {
      
 
-		String [] monomActual= {"8x^0","-7x^2","x^5","1.2x","45.56x^65","0x","9","7.3x^8","7x^3"};
+		String [] monomActual= {"8 x^0","-7x^2","x^5","1.2x","45.56x^65","0x","9","7.3x^8","7x^3"};
 	    String [] monomExpected = {"8.0","-7.0x^2","1.0x^5","1.2x","45.56x^65","0.0","9.0",
 			
 	     "7.3x^8","7.0x^3"};

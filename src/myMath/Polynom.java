@@ -32,6 +32,8 @@ public class Polynom implements Polynom_able{
 	 * @param s: is a string represents a Polynom
 	 */
 	public Polynom(String s) {
+		
+		s=removeSpace(s);
 		String Monom="";
 		int i=0;
 		if(s.charAt(0)=='-')
@@ -404,5 +406,16 @@ public class Polynom implements Polynom_able{
 		function p=new Polynom (s);
 		return p;
 	}
+	
+	
+
+	 private String removeSpace(String str) 
+   { 
+       str = str.replaceAll("\\s",""); 
+       return str; 
+   } 
+	
+	
 }
+
 
