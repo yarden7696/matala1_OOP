@@ -386,19 +386,23 @@ public class Polynom implements Polynom_able{
 	public String toString()
 	{
 		String ans="";
-		for(int i=0;i<Polynom_arr.size();i++)
-		{
-			Monom s=Polynom_arr.get(i);
-			if(s.get_coefficient()>0&&i!=0)ans+="+";
-			if(s.get_coefficient()!=0)ans+=s.toString();	
+		if ( Polynom_arr.size() == 0) {
+			return "0";
 		}
-		return ans;
+		else {
+			for(int i=0;i<Polynom_arr.size();i++)
+			{
+				Monom s=Polynom_arr.get(i);
+				if(s.get_coefficient()>0&&i!=0)ans+="+";
+				if(s.get_coefficient()!=0)ans+=s.toString();
+			}
+			return ans;
+		}
 	}
 	@Override
 	public function initFromString(String s) {
 		function p=new Polynom (s);
 		return p;
 	}
-
 }
 

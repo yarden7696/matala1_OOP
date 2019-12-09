@@ -1,8 +1,10 @@
-package myMath;
+package Ex1Testing;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
+
+import myMath.Monom;
 
 class MonomTest {
 

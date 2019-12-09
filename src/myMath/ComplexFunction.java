@@ -100,14 +100,14 @@ public class ComplexFunction implements complex_function {
 		ComplexFunction temp;
 		if(this.right()!= null)
 		{
-			temp = new ComplexFunction (this.operation,this.left,this.right);
+			temp = new ComplexFunction (this.operation,this.left.copy(),this.right.copy());
 			this.setLeft(temp);
-			this.setRight(f1);
+			this.setRight(f1.copy());
 			this.setOp(Operation.valueOf("Plus"));
 		}
 		else
 		{
-		this.right=f1;
+		this.right=f1.copy();
 		this.setOp(Operation.valueOf("Plus"));
 		}
 	}
@@ -119,14 +119,14 @@ public class ComplexFunction implements complex_function {
 	ComplexFunction temp;
 		if(this.right!= null)
 		{
-			temp = new ComplexFunction (this.operation,this.left,this.right);
+			temp = new ComplexFunction (this.operation,this.left.copy(),this.right.copy());
 			this.setLeft(temp);
-			this.setRight(f1);
+			this.setRight(f1.copy());
 			this.setOp(Operation.valueOf("Times"));
 		}
 		else
 		{
-			this.right=f1;
+			this.right=f1.copy();
 			this.setOp(Operation.valueOf("Times"));
 		}	
 	}
@@ -137,15 +137,15 @@ public class ComplexFunction implements complex_function {
 		ComplexFunction temp;
 		if(this.right!= null)
 		{
-			temp = new ComplexFunction (this.operation,this.left,this.right);
+			temp = new ComplexFunction (this.operation,this.left.copy(),this.right.copy());
 
 			this.setLeft(temp);
-			this.setRight(f1);
+			this.setRight(f1.copy());
 			this.setOp(Operation.valueOf("Divid"));
 		}
 		else
 		{
-			this.right=f1;
+			this.right=f1.copy();
 			this.setOp(Operation.valueOf("Divid"));
 		}
 	}
@@ -156,15 +156,15 @@ public class ComplexFunction implements complex_function {
 		ComplexFunction temp;
 		if(this.right!= null)
 		{
-			temp = new ComplexFunction (this.operation,this.left,this.right);
+			temp = new ComplexFunction (this.operation,this.left.copy(),this.right.copy());
 
 			this.setLeft(temp);
-			this.setRight(f1);
+			this.setRight(f1.copy());
 			this.setOp(Operation.valueOf("Max"));
 		}
 		else
 		{
-			this.right=f1;
+			this.right=f1.copy();
 			this.setOp(Operation.valueOf("Max"));
 		}
 	}
@@ -175,15 +175,15 @@ public class ComplexFunction implements complex_function {
 		ComplexFunction temp;
 		if(this.right!= null)
 		{
-			temp = new ComplexFunction (this.operation,this.left,this.right);
+			temp = new ComplexFunction (this.operation,this.left.copy(),this.right.copy());
 
 			this.setLeft(temp);
-			this.setRight(f1);
+			this.setRight(f1.copy());
 			this.setOp(Operation.valueOf("Min"));
 		}
 		else
 		{
-			this.right=f1;
+			this.right=f1.copy();
 			this.setOp(Operation.valueOf("Min"));
 		}
 	}
@@ -194,15 +194,15 @@ public class ComplexFunction implements complex_function {
 		ComplexFunction temp;
 		if(this.right!= null)
 		{
-			temp = new ComplexFunction (this.operation,this.left,this.right);
+			temp = new ComplexFunction (this.operation,this.left.copy(),this.right.copy());
 
 			this.setLeft(temp);
-			this.setRight(f1);
+			this.setRight(f1.copy());
 			this.setOp(Operation.valueOf("Comp"));
 		}
 		else
 		{
-			this.right=f1;
+			this.right=f1.copy();
 			this.setOp(Operation.valueOf("Comp"));
 		}
 
@@ -262,15 +262,17 @@ public class ComplexFunction implements complex_function {
 	public static void main(String[] args) {
 
 		Polynom p3 = new Polynom("x+3");
-		ComplexFunction cf3 = new ComplexFunction(p3);
-		System.out.println("1:"+cf3);
-		ComplexFunction cf4 = new ComplexFunction("Plus", p3,p3); 
-		System.out.println("2:"+cf4);
-		cf3.plus(cf4);
-		System.out.println("3:"+cf3);
-		cf3.plus(cf4);
-		System.out.println("4:"+cf3);//not good..need to check
-		
+		ComplexFunction cf3 = new ComplexFunction("Plus",p3,p3);
+//		System.out.println("1:"+cf3);
+//		ComplexFunction cf4 = new ComplexFunction("Plus", p3,p3); 
+//		System.out.println("2:"+cf4);
+//		cf3.plus(cf4);
+//		System.out.println("3:"+cf3);
+//		cf3.plus(cf4);
+//		System.out.println("4:"+cf3);//not good..need to check
+		System.out.println(cf3);
+		cf3.plus(cf3);
+		System.out.println(cf3);
 		
 		
 //		System.out.println(cf4);
@@ -279,8 +281,8 @@ public class ComplexFunction implements complex_function {
 //		cf4.div(cf4);
 //		cf4.min(cf4);
 //		cf4.max(cf4);
-	ComplexFunction cf5=new ComplexFunction("Times",p3,p3);
-			System.out.println(cf5);
+//	ComplexFunction cf5=new ComplexFunction("Times",p3,p3);
+//			System.out.println(cf5);
 
 	}
 

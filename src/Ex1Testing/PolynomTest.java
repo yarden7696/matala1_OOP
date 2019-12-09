@@ -1,8 +1,12 @@
-package myMath;
+package Ex1Testing;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
+
+import myMath.Monom;
+import myMath.Polynom;
+import myMath.Polynom_able;
 
 class PolynomTest {
 
@@ -104,9 +108,9 @@ class PolynomTest {
 
 	@Test
 	void testSubstract() {
-		String [] p1= {"3x^2-6x^3+9x-2","-x^3-x^3+5x-4","-4x^2-5","2.2x"};
-		String [] p2= {"x+5x-5","4x^2-5-x","x^2-1+0-4x^4-x","1.1x"};
-		String [] polynomExpected= {"-6.0x^3+3.0x^2+3.0x+3.0","-2.0x^3-4.0x^2+6.0x+1.0","4.0x^4-5.0x^2+1.0x-4.0","1.1x"};
+		String [] p1= {"3x^2-6x^3+9x-2","-x^3-x^3+5x-4","-4x^2-5","2.2x","5x"};
+		String [] p2= {"x+5x-5","4x^2-5-x","x^2-1+0-4x^4-x","1.1x","5x"};
+		String [] polynomExpected= {"-6.0x^3+3.0x^2+3.0x+3.0","-2.0x^3-4.0x^2+6.0x+1.0","4.0x^4-5.0x^2+1.0x-4.0","1.1x","0.0"};
 		for (int i = 0; i < p1.length; i++) 
 		{
 			Polynom actual = new Polynom (p1[i]);
@@ -233,14 +237,14 @@ class PolynomTest {
 	}
 	@Test
 	void testMultiplyMonom() {
-		String [] polynomActual= {"x^3+x^2-x+3.2","-4x^2-5+0.2x","4x^3-2.4","x^2-1+0"};
+		String [] polynomActual= {"x^3+x^2-x+3.2","-4x^2-5+0.2x","4x^3-2.4","x^2-1+0","x^2+2x-1"};
 		Monom positive=new Monom(2,2);//2.0x^2 //case i=0
 		Monom negative=new Monom (-2,2);//-2.0x^2 //case i=1
 		Monom Mdouble=new Monom (2.2,3);//2.2x^3 //case i=2
 		Monom num=new Monom (2,0);//2.0 //case i=3
-//		Monom zero=new Monom (0,10);//0.0 //case i=4
+		Monom zero=new Monom (0,10);//0.0 //case i=4
 
-		String [] polynomExpected= {"2.0x^5+2.0x^4-2.0x^3+6.4x^2","8.0x^4-0.4x^3+10.0x^2","8.8x^6-5.28x^3","2.0x^2-2.0"};
+		String [] polynomExpected= {"2.0x^5+2.0x^4-2.0x^3+6.4x^2","8.0x^4-0.4x^3+10.0x^2","8.8x^6-5.28x^3","2.0x^2-2.0","0.0"};
 		for (int i = 0; i < polynomActual.length; i++) {
 			Polynom actual=new Polynom (polynomActual[i]);
 			Polynom expected=new Polynom (polynomExpected[i]);
@@ -261,10 +265,10 @@ class PolynomTest {
 				actual.multiply(num);
 				assertEquals(actual,expected);
 				break;
-//			case 4:
-//				actual.multiply(zero);
-//				assertEquals(actual,expected);
-//				break;
+			case 4:
+				actual.multiply(zero);
+				assertEquals(actual,expected);
+				break;
 			default:
 			}
 		}
