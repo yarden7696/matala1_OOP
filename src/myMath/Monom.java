@@ -77,7 +77,7 @@ public class Monom implements function {
 		boolean isNegative = false, foundNumber = false;
 		double x = 0, y = 0;
 		int z = 0;
-		int div = 1;
+		double div = 1;
 		for (int i = 0; i < s.length(); i++) {
 			if (s.charAt(i) == 'x') {
 				if (i == s.length() - 1) {
