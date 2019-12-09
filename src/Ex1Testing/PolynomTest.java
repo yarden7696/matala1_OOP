@@ -268,7 +268,7 @@ class PolynomTest {
 				break;
 			case 4:
 				actual.multiply(zero);
-				assertEquals(actual,expected);
+				assertEquals(actual.toString(),expected.toString());
 				break;
 			default:
 			}
