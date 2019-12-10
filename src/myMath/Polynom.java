@@ -153,7 +153,8 @@ public class Polynom implements Polynom_able{
 	 * @param p1 represent Polynom_able.
 	 */
 	@Override
-	public void substract(Polynom_able p1) {
+	public void substract(Polynom_able p2) {
+		Polynom_able p1 = new Polynom(p2.toString());
 		Iterator <Monom> iterp1 = p1.iteretor();
 		while(iterp1.hasNext())
 		{
