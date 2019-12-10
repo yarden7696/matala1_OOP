@@ -5,7 +5,8 @@ import java.util.Comparator;
 
 /**
  * This class represents a simple "Monom" of shape a*x^b, where a is a real
- * number and a is an integer (summed a none negative), see:
+ * number and a is an integer (summed a none negative)
+ * , see:
  * https://en.wikipedia.org/wiki/Monomial The class implements function and
  * support simple operations as: construction, value at x, derivative, add and
  * multiply.
@@ -79,7 +80,7 @@ public class Monom implements function {
 		boolean isNegative = false, foundNumber = false;
 		double x = 0, y = 0;
 		int z = 0;
-		double div = 1;
+		double div = 1.0;
 		for (int i = 0; i < s.length(); i++) {
 			if (s.charAt(i) == 'x') {
 				if (i == s.length() - 1) {
@@ -228,7 +229,7 @@ public class Monom implements function {
 			if(newM==null||this==null)return false;
 			double different= Math.abs(newM.get_coefficient()-this.get_coefficient());
 
-			return ((newM.get_coefficient()==this.get_coefficient())&&(newM.get_power()==this.get_power())&&different<=Monom.EPSILON);
+			return ((newM.get_power()==this.get_power())&&different<=Monom.EPSILON);
 		}
 		return false;
 	}
