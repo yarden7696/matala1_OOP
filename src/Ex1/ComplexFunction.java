@@ -5,11 +5,11 @@ public class ComplexFunction implements complex_function {
 	private function left;
 	private function right;
 	private Operation operation;
-
+	public static final double EPSILON = 0.0000001; // for equals
 	public ComplexFunction(Operation operation,function left, function right)
 	{
-		this.left = left;
-		this.right = right;
+		this.left = left.copy();
+		this.right = right.copy();
 		this.operation = operation;
 	}
 	//	defoult constractor to test initfromstring
@@ -33,7 +33,7 @@ public class ComplexFunction implements complex_function {
 		if(left!=null)this.left = left.copy();
 		if(right!=null)this.right = right.copy();
 		//		this.operation=Operation.valueOf(operation);
-		
+
 		switch(operation.toLowerCase())
 		{
 		case "plus":
@@ -61,9 +61,9 @@ public class ComplexFunction implements complex_function {
 				throw new RuntimeException("None operation on functions");
 			}
 			break;
-			default:
-				this.operation=Operation.Error;
-				throw new RuntimeException("Illegal Operation");
+		default:
+			this.operation=Operation.Error;
+			throw new RuntimeException("Illegal Operation");
 		}
 	}
 
@@ -139,7 +139,7 @@ public class ComplexFunction implements complex_function {
 		int iComma=0; // index of comma
 		int open=1; //sum of '('
 		int i=start+1; // start after first '('
-		
+
 		while(i<s.length()&&open!=iComma) 
 		{
 			if(s.charAt(i)=='(')open++;
@@ -282,6 +282,22 @@ public class ComplexFunction implements complex_function {
 		}
 
 	}
+	@Override
+	public boolean equals(Object obj) {
+		boolean flag=true;
+
+		if(obj instanceof ComplexFunction) // if object is Complexfunction type
+		{
+			ComplexFunction cf= (ComplexFunction) obj;
+			if(cf.operation==this.operation&&cf.left==this.left&&cf.right==this.right)flag=true;
+			double x;//value of x
+			for (x=-15; x <= 15; x+=0.1) 
+			{
+				if(Math.abs(this.f(x)-cf.f(x))>EPSILON)return false;	// EPSILON=0.0000001	
+			}
+		}
+		return flag;
+	}
 
 	@Override
 	public function left() {
@@ -373,16 +389,19 @@ public class ComplexFunction implements complex_function {
 
 	public static void main(String[] args) {
 
-//				Polynom p3 = new Polynom("x+1");
-//				ComplexFunction cf3 = new ComplexFunction("max",p3,p3);
-//				System.out.println("1:"+cf3);
-//				
-//				ComplexFunction cf4 = new ComplexFunction("mul", p3,p3); 
-//				System.out.println("2:"+cf4);
-//				cf3.plus(cf4);
-//				System.out.println("3:"+cf3);
-//				cf3.plus(cf4);
-//				System.out.println("4:"+cf3);//not good..need to check
+		Polynom p3 = new Polynom("x+1");
+		Polynom p4 = new Polynom("x+1");
+		ComplexFunction cf3 = new ComplexFunction("plus",p3,p3);
+//		ComplexFunction cf5 = new ComplexFunction("plus",p3,p4);
+//		System.out.println(cf3.equals(cf5));
+						System.out.println("1:"+cf3);
+						
+						ComplexFunction cf4 = new ComplexFunction("mul", p3,p3); 
+						System.out.println("2:"+cf4);
+		//				cf3.plus(cf4);
+		//				System.out.println("3:"+cf3);
+		//				cf3.plus(cf4);
+		//				System.out.println("4:"+cf3);//not good..need to check
 		//		System.out.println(cf3);
 		//		cf3.plus(cf3);
 		//		System.out.println(cf3);
@@ -396,10 +415,10 @@ public class ComplexFunction implements complex_function {
 		//		cf4.max(cf4);
 		//	ComplexFunction cf5=new ComplexFunction("Times",p3,p3);
 		//			System.out.println(cf5);
-		function cff = new ComplexFunction();
-		System.out.println(cff);
-		function cff2 = cff.initFromString("div(plus(1,2),3)");
-		System.out.println(cff2);
+		//		function cff = new ComplexFunction();
+		//		System.out.println(cff);
+		//		function cff2 = cff.initFromString("div(plus(1,2),3)");
+		//		System.out.println(cff2);
 
 	}
 
