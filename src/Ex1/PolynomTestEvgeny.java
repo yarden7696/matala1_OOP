@@ -1,4 +1,4 @@
-package myMath;
+package Ex1;
 
 public class PolynomTestEvgeny {
 	static int fails = 0;

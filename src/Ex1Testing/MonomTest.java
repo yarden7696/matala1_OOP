@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import myMath.Monom;
+import Ex1.Monom;
 
 class MonomTest {
 

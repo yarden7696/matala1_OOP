@@ -1,4 +1,4 @@
-package myMath;
+package Ex1;
 
 public class ComplexFunction implements complex_function {
 
@@ -127,12 +127,31 @@ public class ComplexFunction implements complex_function {
 			int start=s.indexOf('(');// index of open '('
 			int end=s.indexOf(')');// index of close ')'
 			String op = s.substring(0, start); // save operation
-			int comma=s.indexOf(','); // index of ','
+			int comma=findComma(s, start); // index of ',' between left and right
 			function l=initFromString(s.substring(start+1, comma)); // recursive call of left function
 			function r=initFromString(s.substring(comma+1,s.length()-1)); // recurcive call of right function
 			f=new ComplexFunction(op,l,r);
 		}
 		return f;
+	}
+	// help function to find the comma between left and right
+	public int findComma(String s,int start){
+		int iComma=0; // index of comma
+		int open=1; //sum of '('
+		int i=start+1; // start after first '('
+		
+		while(i<s.length()&&open!=iComma) 
+		{
+			if(s.charAt(i)=='(')open++;
+			if(s.charAt(i)==',')iComma++;
+			if(open==iComma)
+			{
+				iComma=i;
+				break;
+			}
+			i++;
+		}
+		return iComma;
 	}
 
 	@Override
@@ -354,13 +373,14 @@ public class ComplexFunction implements complex_function {
 
 	public static void main(String[] args) {
 
-				Polynom p3 = new Polynom("x+1");
-				ComplexFunction cf3 = new ComplexFunction("div",p3,p3);
-				System.out.println("1:"+cf3);
-				ComplexFunction cf4 = new ComplexFunction("mul", p3,p3); 
-				System.out.println("2:"+cf4);
-				cf3.plus(cf4);
-				System.out.println("3:"+cf3);
+//				Polynom p3 = new Polynom("x+1");
+//				ComplexFunction cf3 = new ComplexFunction("max",p3,p3);
+//				System.out.println("1:"+cf3);
+//				
+//				ComplexFunction cf4 = new ComplexFunction("mul", p3,p3); 
+//				System.out.println("2:"+cf4);
+//				cf3.plus(cf4);
+//				System.out.println("3:"+cf3);
 //				cf3.plus(cf4);
 //				System.out.println("4:"+cf3);//not good..need to check
 		//		System.out.println(cf3);
@@ -378,7 +398,7 @@ public class ComplexFunction implements complex_function {
 		//			System.out.println(cf5);
 		function cff = new ComplexFunction();
 		System.out.println(cff);
-		function cff2 = cff.initFromString("plus(x,4x^3)");
+		function cff2 = cff.initFromString("div(plus(1,2),3)");
 		System.out.println(cff2);
 
 	}
