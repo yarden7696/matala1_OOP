@@ -224,4 +224,8 @@ import java.util.Iterator;
 		return functions.get(i);
 	}
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> branch 'master' of https://github.com/yarden7696/matala1_OOP.git
