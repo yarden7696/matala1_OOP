@@ -3,8 +3,11 @@ import java.util.ArrayList;
 import java.awt.Color;
 import java.awt.Font;
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Collection;
 import java.util.Iterator;
 
@@ -145,8 +148,25 @@ import java.util.Iterator;
 
 	@Override
 	public void saveToFile(String file) throws IOException {
-		// TODO Auto-generated method stub
+		File f= new File (file);
 		
+	try {
+		PrintWriter pw= new PrintWriter (f);
+		StringBuilder sb = new StringBuilder();
+		for(int i=0; i<this.functions.size(); i++)
+		{
+			function fun= this.functions.get(i);
+			sb.append(fun.toString() + "\n" );	
+		}
+		pw.write(sb.toString());
+		pw.close();
+	}	
+	catch (FileNotFoundException e) 
+	{
+		e.printStackTrace();
+		return;
+
+	}
 	}
 
 	@Override

@@ -12,13 +12,13 @@ public class ComplexFunction implements complex_function {
 		this.right = right;
 		this.operation = operation;
 	}
-//	defoult constractor to test initfromstring
-		public ComplexFunction()
-		{
-			this.left =null;
-			this.right = null;
-			this.operation = Operation.None;	
-		}
+	//	defoult constractor to test initfromstring
+	public ComplexFunction()
+	{
+		this.left =null;
+		this.right = null;
+		this.operation = Operation.None;	
+	}
 
 
 	public ComplexFunction(function f)
@@ -32,17 +32,39 @@ public class ComplexFunction implements complex_function {
 	{	
 		if(left!=null)this.left = left.copy();
 		if(right!=null)this.right = right.copy();
-		this.operation=Operation.valueOf(operation);
-		if(this.operation.name()=="None")
+		//		this.operation=Operation.valueOf(operation);
+		
+		switch(operation.toLowerCase())
 		{
+		case "plus":
+			this.operation=Operation.Plus;
+			break;
+		case "mul":
+			this.operation=Operation.Times;
+			break;
+		case "div":
+			this.operation=Operation.Divid;
+			break;
+		case "max":
+			this.operation=Operation.Max;
+			break;
+		case "min":
+			this.operation=Operation.Min;
+			break;
+		case "comp":
+			this.operation=Operation.Comp;
+			break;
+		case "none":
+			this.operation=Operation.None;
 			if(this.left!=null&&this.right!=null)//if there is a left and right without operation
 			{
 				throw new RuntimeException("None operation on functions");
 			}
+			break;
+			default:
+				this.operation=Operation.Error;
+				throw new RuntimeException("Illegal Operation");
 		}
-		if(this.operation.name()=="Error")throw new RuntimeException("Illegal Operation");
-
-
 	}
 
 
@@ -123,7 +145,7 @@ public class ComplexFunction implements complex_function {
 		}
 		else
 		{
-			temp =  new ComplexFunction (this.operation.name(), this.left(),this.right());
+			temp =  new ComplexFunction (this.operation, this.left(),this.right());
 		}
 		return temp ;
 	}
@@ -332,15 +354,15 @@ public class ComplexFunction implements complex_function {
 
 	public static void main(String[] args) {
 
-		Polynom p3 = new Polynom("x+1");
-		ComplexFunction cf3 = new ComplexFunction("None",p3,p3);
-		System.out.println("1:"+cf3);
-		//		ComplexFunction cf4 = new ComplexFunction("Plus", p3,p3); 
-		//		System.out.println("2:"+cf4);
-		//		cf3.plus(cf4);
-		//		System.out.println("3:"+cf3);
-		//		cf3.plus(cf4);
-		//		System.out.println("4:"+cf3);//not good..need to check
+				Polynom p3 = new Polynom("x+1");
+				ComplexFunction cf3 = new ComplexFunction("div",p3,p3);
+				System.out.println("1:"+cf3);
+				ComplexFunction cf4 = new ComplexFunction("mul", p3,p3); 
+				System.out.println("2:"+cf4);
+				cf3.plus(cf4);
+				System.out.println("3:"+cf3);
+//				cf3.plus(cf4);
+//				System.out.println("4:"+cf3);//not good..need to check
 		//		System.out.println(cf3);
 		//		cf3.plus(cf3);
 		//		System.out.println(cf3);
@@ -354,10 +376,10 @@ public class ComplexFunction implements complex_function {
 		//		cf4.max(cf4);
 		//	ComplexFunction cf5=new ComplexFunction("Times",p3,p3);
 		//			System.out.println(cf5);
-		           function cff = new ComplexFunction();
-		            System.out.println(cff);
-		           function cff2 = cff.initFromString("Plus(x,4x^3)");
-		           System.out.println(cff2);
+		function cff = new ComplexFunction();
+		System.out.println(cff);
+		function cff2 = cff.initFromString("plus(x,4x^3)");
+		System.out.println(cff2);
 
 	}
 
