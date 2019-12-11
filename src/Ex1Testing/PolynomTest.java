@@ -276,9 +276,11 @@ class PolynomTest {
 	}
 	@Test
 	void initFromString() {
-//		Polynom actual=new Polynom ("2-4x^3+2.2x+4x^2-4x^1+3x^10");
-//		Polynom expected=new Polynom ("3.0x^10-4.0x^3+4.0x^2-4.0x+2.0");
-//		actual.toString();
-//		assertEquals(expected, actual);
+		String [] actual= {"4x^2+5x-2","3x-2","-x^3+2x^2-x","5"};
+		for (int i = 0; i < actual.length; i++)
+		{
+			Polynom expected=new Polynom(actual[i]);
+			assertEquals(expected, expected.initFromString(actual[i]));
+		}
 	}
 }

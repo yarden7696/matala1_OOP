@@ -13,12 +13,12 @@ public class ComplexFunction implements complex_function {
 		this.operation = operation;
 	}
 	//	defoult constractor to test initfromstring
-	public ComplexFunction()
-	{
-		this.left =null;
-		this.right = null;
-		this.operation = Operation.None;	
-	}
+//	public ComplexFunction()
+//	{
+//		this.left =null;
+//		this.right = null;
+//		this.operation = Operation.None;	
+//	}
 
 
 	public ComplexFunction(function f)
@@ -291,7 +291,7 @@ public class ComplexFunction implements complex_function {
 			ComplexFunction cf= (ComplexFunction) obj;
 			if(cf.operation==this.operation&&cf.left==this.left&&cf.right==this.right)flag=true;
 			double x;//value of x
-			for (x=-15; x <= 15; x+=0.1) 
+			for (x=-10; x <= 10; x+=0.1) 
 			{
 				if(Math.abs(this.f(x)-cf.f(x))>EPSILON)return false;	// EPSILON=0.0000001	
 			}

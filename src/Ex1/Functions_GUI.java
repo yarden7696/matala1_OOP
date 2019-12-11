@@ -26,9 +26,9 @@ import com.google.gson.Gson;
  		
     	 
     	 Functions_GUI f= new Functions_GUI(); 
-    //	 f.add(new Polynom("0.0"));
+    	 f.add(new Polynom("0.0"));
     	 try {
-			f.initFromFile("C:\\Users\\user\\eclipse-workspace\\OOP Tasks Real\\matala1_OOP\\function_file.txt");
+			f.initFromFile("function_file.txt");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -43,7 +43,7 @@ import com.google.gson.Gson;
     	 
     	 
  		//f.drawFunctions(w,h,rx,ry,res);
- 		f.drawFunctions("C:\\Users\\user\\eclipse-workspace\\OOP Tasks Real\\matala1_OOP\\src\\Ex1Testing\\GUI_params.txt");
+ 		f.drawFunctions("function_file.txt");
  	}
 	
 	@Override
@@ -246,7 +246,7 @@ import com.google.gson.Gson;
 		int c = a%Colors.length;
 		StdDraw.setPenColor(Colors[c]);
 	
-		System.out.println(a+") "+Colors[a]+"  f(x)= "+functions.get(a));
+		System.out.println(a+") "+Colors[c]+"  f(x)= "+functions.get(a));
 		for (int i = 0; i < res; i++) {
 			StdDraw.line(x[i], yy[a][i], x[i+1], yy[a][i+1]);
 		}
@@ -268,7 +268,7 @@ import com.google.gson.Gson;
 			 Range rx = new Range(param.Range_X[0],param.Range_X[1]);
 	         Range ry = new Range(param.Range_Y[0],param.Range_Y[1]);
 	         drawFunctions(param.Width,param.Height,rx,ry,param.Resolution);
-			
+			return;
 			
 		} 
 		catch (FileNotFoundException e) {
@@ -280,6 +280,5 @@ import com.google.gson.Gson;
 		return functions.get(i);
 	}
 	
-	
-	
+
 }
