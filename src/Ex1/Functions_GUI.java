@@ -11,6 +11,8 @@ import java.io.PrintWriter;
 import java.util.Collection;
 import java.util.Iterator;
 
+import com.google.gson.Gson;
+
      public class Functions_GUI implements functions{
 
      static ArrayList<function> functions= new ArrayList<function>();
@@ -18,14 +20,30 @@ import java.util.Iterator;
 	
      public static void main(String[] a) {
     
- 		Polynom s0 = new Polynom("x^2");
- 		functions.add(s0);
+    	 function cf1=(new Polynom ("2x^3 + 2x^5"));
+    	 functions.add(cf1);
+    	 functions.add(new ComplexFunction("plus",cf1,cf1));
  		
+    	 
     	 Functions_GUI f= new Functions_GUI(); 
-    	 int w=1000, h=600, res=200;
- 		Range rx = new Range(-10,10);
- 		Range ry = new Range(-5,10);
- 		f.drawFunctions(w,h,rx,ry,res);
+    //	 f.add(new Polynom("0.0"));
+    	 try {
+			f.initFromFile("C:\\Users\\user\\eclipse-workspace\\OOP Tasks Real\\matala1_OOP\\function_file.txt");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	 
+    	 try {
+			f.saveToFile("check.txt");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	 
+    	 
+ 		//f.drawFunctions(w,h,rx,ry,res);
+ 		f.drawFunctions("C:\\Users\\user\\eclipse-workspace\\OOP Tasks Real\\matala1_OOP\\src\\Ex1Testing\\GUI_params.txt");
  	}
 	
 	@Override
@@ -120,7 +138,7 @@ import java.util.Iterator;
 	@Override
 	public void initFromFile(String file) throws IOException {
 		BufferedReader br= null;
-		function fun= new ComplexFunction(new Polynom("1"));
+		function fun= new ComplexFunction(new Polynom("0"));
 		try {
 			br= new BufferedReader(new FileReader(file));
 			String line;
@@ -209,18 +227,20 @@ import java.util.Iterator;
 		            ////////x axis
 		StdDraw.setPenColor(Color.BLACK);
 		StdDraw.setPenRadius(0.005);
-		StdDraw.line(rx.get_min(), yy[0][res/2], rx.get_max(), yy[0][res/2]);
+		StdDraw.line(rx.get_min(),0, rx.get_max(), 0);
 		StdDraw.setFont(new Font("TimesRoman", Font.BOLD, 15));
 		for (int i = 0; i <= res; i=i+10)
 		{
-			StdDraw.text(x[i]-0.07, -0.07, Integer.toString(i-res/2));
+			StdDraw.text(x[i]-0.07,  -0.4, Integer.toString(i-res/2));
 		}
+		
 		////////y axis
 		StdDraw.line(x[res/2], ry.get_min(), x[res/2], ry.get_max());
 		for (double i = ry.get_min(); i <= ry.get_max(); i=i+1) {
 		StdDraw.text(x[res/2]-0.07, i+0.07, Double.toString(i));
 		}
         
+		
 		
 	for(int a=0;a<size;a++) {
 		int c = a%Colors.length;
@@ -236,16 +256,30 @@ import java.util.Iterator;
 
 	@Override
 	public void drawFunctions(String json_file) {
-		// TODO Auto-generated method stub
+
+		Gson gson = new Gson();
 		
+		try 
+		{
+			
+			FileReader reader = new FileReader(json_file);
+			GUI_Param param = gson.fromJson(reader,GUI_Param.class);
+			
+			 Range rx = new Range(param.Range_X[0],param.Range_X[1]);
+	         Range ry = new Range(param.Range_Y[0],param.Range_Y[1]);
+	         drawFunctions(param.Width,param.Height,rx,ry,param.Resolution);
+			
+			
+		} 
+		catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public function get(int i) {
 		return functions.get(i);
 	}
-
-<<<<<<< HEAD
+	
+	
+	
 }
-=======
-}
->>>>>>> branch 'master' of https://github.com/yarden7696/matala1_OOP.git
