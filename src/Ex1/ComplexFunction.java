@@ -1,5 +1,7 @@
 package Ex1;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class ComplexFunction implements complex_function {
 
 	private function left;
@@ -389,15 +391,15 @@ public class ComplexFunction implements complex_function {
 
 	public static void main(String[] args) {
 
-		Polynom p3 = new Polynom("x+1");
-		Polynom p4 = new Polynom("x+1");
-		ComplexFunction cf3 = new ComplexFunction("plus",p3,p3);
+//		Polynom p3 = new Polynom("x+1");
+//		Polynom p4 = new Polynom("x+1");
+//		ComplexFunction cf3 = new ComplexFunction("plus",p3,p3);
 //		ComplexFunction cf5 = new ComplexFunction("plus",p3,p4);
 //		System.out.println(cf3.equals(cf5));
-						System.out.println("1:"+cf3);
-						
-						ComplexFunction cf4 = new ComplexFunction("mul", p3,p3); 
-						System.out.println("2:"+cf4);
+//						System.out.println("1:"+cf3);
+//						
+//						ComplexFunction cf4 = new ComplexFunction("mul", p3,p3); 
+//						System.out.println("2:"+cf4);
 		//				cf3.plus(cf4);
 		//				System.out.println("3:"+cf3);
 		//				cf3.plus(cf4);
@@ -419,7 +421,28 @@ public class ComplexFunction implements complex_function {
 		//		System.out.println(cff);
 		//		function cff2 = cff.initFromString("div(plus(1,2),3)");
 		//		System.out.println(cff2);
-
+//						String [] polynomLeft= {"2x^2-x+1.5","-1.2x+1","5"};
+//						String [] polynomRight= {"-x^4","4x^3","5.2x+1"};
+//						Polynom l=new Polynom(polynomLeft[0]);
+//						Polynom r=new Polynom(polynomRight[0]);
+//						ComplexFunction cf=new ComplexFunction("Plus",l,r);
+//						function cf1=cf.initFromString("plus(2x^2-x+1.5,-x^4)");
+//						assertEquals(cf, cf1);
+//						cf.mul(cf1);
+//						cf1=cf.initFromString("mul(plus(2x^2-x+1.5,-x^4),plus(2x^2-x+1.5,-x^4))");
+//						assertEquals(cf, cf1);
+//						cf.div(cf1);
+//						System.out.println(cf);
+		String [] polynomLeft= {"2x^2-x+1.5","2x^3-1.2x+1","x^4-5.3"};
+		String [] polynomRight= {"-2x^2+x-1.5","4x^3","x^4-2.3"};
+		for (int i = 0; i < polynomLeft.length; i++) 
+		{
+			Polynom l=new Polynom(polynomLeft[i]);
+			Polynom r=new Polynom(polynomRight[i]);
+			ComplexFunction cf=new ComplexFunction("max",l,r);
+			cf.max(cf);
+			System.out.println(cf+",");
+		}
 	}
 
 }

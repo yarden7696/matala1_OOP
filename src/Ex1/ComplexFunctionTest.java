@@ -11,7 +11,7 @@ class ComplexFunctionTest {
 	void testComplexFunction() {
 		String [] op= {"plus","mul","div","max","min","comp"};
 		String [] polynomLeft= {"2x^2-x+1.5"};
-		String [] polynomRight= {"-x^4+3.5x+1"};
+		String [] polynomRight= {"-x^4+3 .5x  + 1"};//spaces
 		String [] expected= {"plus(2.0x^2-1.0x+1.5,-1.0x^4+3.5x+1.0)","mul(2.0x^2-1.0x+1.5,-1.0x^4+3.5x+1.0)","div(2.0x^2-1.0x+1.5,-1.0x^4+3.5x+1.0)","max(2.0x^2-1.0x+1.5,-1.0x^4+3.5x+1.0)","min(2.0x^2-1.0x+1.5,-1.0x^4+3.5x+1.0)","comp(2.0x^2-1.0x+1.5,-1.0x^4+3.5x+1.0)"};
 		for (int i = 0; i < 1; i++) 
 		{
@@ -41,25 +41,50 @@ class ComplexFunctionTest {
 
 	@Test
 	void testF() {
-		fail("Not yet implemented");
+		String [] op = {"plus","mul","plus"};
+		String [] polynomLeft= {"2x^2-x+1.5","1.2x+1","5x^10-4x+7"};
+		String [] polynomRight= {"-x^4","4x^3+5-0","-5x^10+4x-7"};
+		double [] expected= {-64.5,519.8,0.0};
+		for (int i = 0; i < expected.length; i++) 
+		{
+			Polynom l=new Polynom(polynomLeft[i]);
+			Polynom r=new Polynom(polynomRight[i]);
+			String opi=op[i];
+			ComplexFunction cf=new ComplexFunction(opi,l,r);
+			double actual=cf.f(3);
+			assertEquals(expected[i], actual);
+		}
 	}
 
 	@Test
 	void testInitFromString() {
-		String [] op= {"plus",};
-		String [] polynomLeft= {"2x^2-x+1.5","-1.2x+1","5"};
-		String [] polynomRight= {"-x^4","4x^3","5.2x+1"};
+		
+		String [] polynomLeft= {"2x^2-x+1.5","-1.2x+1"};
+		String [] polynomRight= {"-x^4","4x^3"};
+		
 		Polynom l=new Polynom(polynomLeft[0]);
 		Polynom r=new Polynom(polynomRight[0]);
-		ComplexFunction cf=new ComplexFunction(op[0],l,r);
-		assertEquals(cf, cf.initFromString("plus(2x^2-x+1.5,-x^4)"));
-		for (int i = 1; i < op.length; i++)
-		{
-			Polynom le=new Polynom(polynomLeft[i]);
-			Polynom ri=new Polynom(polynomRight[i]);
-			ComplexFunction cf1=new ComplexFunction(op[i],le,ri);
-			cf.mul(cf1);
-		}
+		ComplexFunction cf=new ComplexFunction("Plus",l,r);
+		function cf1=cf.initFromString("plus(2x^2-x+1.5,-x^4)");
+		assertEquals(cf, cf1);
+		cf.mul(cf1);
+		cf1=cf.initFromString("mul(plus(2x^2-x+1.5,-x^4),plus(2x^2-x+1.5,-x^4))");
+		assertEquals(cf, cf1);
+		cf.div(cf1);
+		cf1=cf.initFromString("div(mul(plus(2.0x^2-1.0x+1.5,-1.0x^4),plus(2.0x^2-1.0x+1.5,-1.0x^4)),mul(plus(2.0x^2-1.0x+1.5,-1.0x^4),plus(2.0x^2-1.0x+1.5,-1.0x^4)))");
+		assertEquals(cf, cf1);
+		//
+		Polynom le=new Polynom(polynomLeft[1]);
+		Polynom ri=new Polynom(polynomRight[1]);
+		ComplexFunction cf3=new ComplexFunction("comp",le,ri);
+		function cf4=cf3.initFromString("comp(-1.2x+1,4x^3)");
+		assertEquals(cf4, cf3);
+		cf3.max(cf4);
+		cf1=cf.initFromString("max(comp(-1.2x+1,4x^3),comp(-1.2x+1,4x^3))");
+		assertEquals(cf3, cf4);
+		cf3.min(cf4);
+		cf4=cf3.initFromString("min(max(comp(-1.2x+1,4x^3),comp(-1.2x+1,4x^3)),max(comp(-1.2x+1,4x^3),comp(-1.2x+1,4x^3)))");
+		assertEquals(cf3, cf4);
 	}
 
 
@@ -75,32 +100,104 @@ class ComplexFunctionTest {
 
 	@Test
 	void testPlus() {
-		fail("Not yet implemented");
+		String [] polynomLeft= {"2x^2-x+1.5","2x^3-1.2x+1","x^4-5.3"};
+		String [] polynomRight= {"-2x^2+x-1.5","4x^3","x^4-2.3"};
+		String [] expected= {"plus(plus(2.0x^2-1.0x+1.5,-2.0x^2+1.0x-1.5),plus(plus(2.0x^2-1.0x+1.5,-2.0x^2+1.0x-1.5),-2.0x^2+1.0x-1.5))","plus(plus(2.0x^3-1.2x+1.0,4.0x^3),plus(plus(2.0x^3-1.2x+1.0,4.0x^3),4.0x^3))","plus(plus(1.0x^4-5.3,1.0x^4-2.3),plus(plus(1.0x^4-5.3,1.0x^4-2.3),1.0x^4-2.3))"};
+		for (int i = 0; i < expected.length; i++) 
+		{
+			Polynom l=new Polynom(polynomLeft[i]);
+			Polynom r=new Polynom(polynomRight[i]);
+			ComplexFunction cf=new ComplexFunction("plus",l,r);
+			cf.plus(cf);
+			assertEquals(expected[i], cf.toString());
+
+		}
 	}
 
 	@Test
 	void testMul() {
-		fail("Not yet implemented");
+		String [] polynomLeft= {"2x^2-x+1.5","2x^3-1.2x+1","x^4-5.3"};
+		String [] polynomRight= {"-2x^2+x-1.5","4x^3","x^4-2.3"};
+		String [] expected= {"mul(mul(2.0x^2-1.0x+1.5,-2.0x^2+1.0x-1.5),mul(mul(2.0x^2-1.0x+1.5,-2.0x^2+1.0x-1.5),-2.0x^2+1.0x-1.5))","mul(mul(2.0x^3-1.2x+1.0,4.0x^3),mul(mul(2.0x^3-1.2x+1.0,4.0x^3),4.0x^3))","mul(mul(1.0x^4-5.3,1.0x^4-2.3),mul(mul(1.0x^4-5.3,1.0x^4-2.3),1.0x^4-2.3))"};
+		for (int i = 0; i < expected.length; i++) 
+		{
+			Polynom l=new Polynom(polynomLeft[i]);
+			Polynom r=new Polynom(polynomRight[i]);
+			ComplexFunction cf=new ComplexFunction("mul",l,r);
+			cf.mul(cf);
+			assertEquals(expected[i], cf.toString());
+
+		}
 	}
 
 	@Test
 	void testDiv() {
-		fail("Not yet implemented");
+		String [] polynomLeft= {"2x^2-x+1.5","2x^3-1.2x+1","x^4-5.3"};
+		String [] polynomRight= {"-2x^2+x-1.5","4x^3","x^4-2.3"};
+		String [] expected= {"div(div(2.0x^2-1.0x+1.5,-2.0x^2+1.0x-1.5),div(div(2.0x^2-1.0x+1.5,-2.0x^2+1.0x-1.5),-2.0x^2+1.0x-1.5))",
+				"div(div(2.0x^3-1.2x+1.0,4.0x^3),div(div(2.0x^3-1.2x+1.0,4.0x^3),4.0x^3))",
+				"div(div(1.0x^4-5.3,1.0x^4-2.3),div(div(1.0x^4-5.3,1.0x^4-2.3),1.0x^4-2.3))"};
+		for (int i = 0; i < expected.length; i++) 
+		{
+			Polynom l=new Polynom(polynomLeft[i]);
+			Polynom r=new Polynom(polynomRight[i]);
+			ComplexFunction cf=new ComplexFunction("div",l,r);
+			cf.div(cf);
+			assertEquals(expected[i], cf.toString());
+
+		}
 	}
 
 	@Test
 	void testMax() {
-		fail("Not yet implemented");
+		String [] polynomLeft= {"2x^2-x+1.5","2x^3-1.2x+1","x^4-5.3"};
+		String [] polynomRight= {"-2x^2+x-1.5","4x^3","x^4-2.3"};
+		String [] expected= {"max(max(2.0x^2-1.0x+1.5,-2.0x^2+1.0x-1.5),max(max(2.0x^2-1.0x+1.5,-2.0x^2+1.0x-1.5),-2.0x^2+1.0x-1.5))",
+			"max(max(2.0x^3-1.2x+1.0,4.0x^3),max(max(2.0x^3-1.2x+1.0,4.0x^3),4.0x^3))",
+				"max(max(1.0x^4-5.3,1.0x^4-2.3),max(max(1.0x^4-5.3,1.0x^4-2.3),1.0x^4-2.3))"};
+		for (int i = 0; i < expected.length; i++) 
+		{
+			Polynom l=new Polynom(polynomLeft[i]);
+			Polynom r=new Polynom(polynomRight[i]);
+			ComplexFunction cf=new ComplexFunction("max",l,r);
+			cf.max(cf);
+			assertEquals(expected[i], cf.toString());
+
+		}
 	}
 
 	@Test
 	void testMin() {
-		fail("Not yet implemented");
+		String [] polynomLeft= {"2x^2-x+1.5","2x^3-1.2x+1","x^4-5.3"};
+		String [] polynomRight= {"-2x^2+x-1.5","4x^3","x^4-2.3"};
+		String [] expected= {"min(min(2.0x^2-1.0x+1.5,-2.0x^2+1.0x-1.5),min(min(2.0x^2-1.0x+1.5,-2.0x^2+1.0x-1.5),-2.0x^2+1.0x-1.5))",
+			"min(min(2.0x^3-1.2x+1.0,4.0x^3),min(min(2.0x^3-1.2x+1.0,4.0x^3),4.0x^3))",
+				"min(min(1.0x^4-5.3,1.0x^4-2.3),min(min(1.0x^4-5.3,1.0x^4-2.3),1.0x^4-2.3))"};
+		for (int i = 0; i < expected.length; i++) 
+		{
+			Polynom l=new Polynom(polynomLeft[i]);
+			Polynom r=new Polynom(polynomRight[i]);
+			ComplexFunction cf=new ComplexFunction("min",l,r);
+			cf.min(cf);
+			assertEquals(expected[i], cf.toString());
+
+		}
 	}
 
 	@Test
 	void testComp() {
-		fail("Not yet implemented");
+		String [] polynomLeft= {"2x^2-x+1.5","2x^3-1.2x+1","x^4-5.3"};
+		String [] polynomRight= {"-2x^2+x-1.5","4x^3","x^4-2.3"};
+		String [] expected= {"comp(comp(2.0x^2-1.0x+1.5,-2.0x^2+1.0x-1.5),comp(comp(2.0x^2-1.0x+1.5,-2.0x^2+1.0x-1.5),-2.0x^2+1.0x-1.5))","comp(comp(2.0x^3-1.2x+1.0,4.0x^3),comp(comp(2.0x^3-1.2x+1.0,4.0x^3),4.0x^3))","comp(comp(1.0x^4-5.3,1.0x^4-2.3),comp(comp(1.0x^4-5.3,1.0x^4-2.3),1.0x^4-2.3))"};
+		for (int i = 0; i < expected.length; i++) 
+		{
+			Polynom l=new Polynom(polynomLeft[i]);
+			Polynom r=new Polynom(polynomRight[i]);
+			ComplexFunction cf=new ComplexFunction("comp",l,r);
+			cf.comp(cf);
+			assertEquals(expected[i], cf.toString());
+
+		}
 	}
 
 	@Test
