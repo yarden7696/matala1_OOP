@@ -244,6 +244,12 @@ class ComplexFunctionTest {
 			{
 				fail("The objects are equals");
 			}
+			actual.plus(f);
+			expected.min(f);
+			if(actual.equals(expected))
+			{
+				fail("The objects are not equals");
+			}
 		}
 	}
 }

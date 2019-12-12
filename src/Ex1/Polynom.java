@@ -245,6 +245,8 @@ public class Polynom implements Polynom_able{
 	{
 		double res = 0;
 		double mid=0;
+		if(this.f(x0)==0) return x0;
+		if(this.f(x1)==0)return x1;
 		if(this.f(x0)*this.f(x1)<0)
 		{
 			if(this.f(x0)>0 && this.f(x1)<0)

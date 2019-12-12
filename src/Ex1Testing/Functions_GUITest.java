@@ -59,32 +59,49 @@ class Functions_GUITest {
 		_data = FunctionsFactory();
 	}
 
-	//@Test
+	@Test
 	void testFunctions_GUI() {
 	//	fail("Not yet implemented");
 	}
 
-	//@Test
+	@Test
 	void testInitFromFile() {
-	//	fail("Not yet implemented");
-	}
 
-	//@Test
-	void testSaveToFile() {
-		
-		
+		try {
+			Functions_GUI fn = new Functions_GUI();
+			fn.initFromFile("file.txt");
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
 	}
+		
+	
+
+      @Test
+	void testSaveToFile() {
+    	  try {
+  			_data.saveToFile("check.txt");
+  		}
+  		catch(Exception e)
+  		{
+  			e.printStackTrace();
+  		}
+  	}
+		
+	
 
 	//@Test
 	void testDrawFunctions() {
-		//_data.drawFunctions();
-	//	fail("Not yet implemented");
+		_data.drawFunctions("GUI_param.txt");
+	  // fail("Not yet implemented");
 	}
 
 	@Test
 	void testDrawFunctionsIntIntRangeRangeInt() {
 		_data.drawFunctions("GUI_param.txt");
-//		fail("Not yet implemented");
+		//fail("Not yet implemented");
 	}
 	public static functions FunctionsFactory() {
 		functions ans = new Functions_GUI();
