@@ -35,6 +35,7 @@ public class Monom implements function {
 
 	public double get_coefficient() {
 		return this._coefficient;
+		
 	}
 
 	public int get_power() {
@@ -57,6 +58,7 @@ public class Monom implements function {
 		double ans = 0;
 		double p = this.get_power();
 		ans = this.get_coefficient() * Math.pow(x, p);
+		if(ans==-0) ans=0;
 		return ans;
 	}
 
@@ -258,7 +260,7 @@ public class Monom implements function {
 	private int _power;
 
 	/**
-	 * this function become the monom string to a object function
+	 * this function become the monom string to an object function
 	 */
 
 	@Override
@@ -282,7 +284,7 @@ public class Monom implements function {
 
 	}
 
-	
+	// private function thats remove space in a given string.
 	 private String removeSpace(String str) 
     { 
         str = str.replaceAll("\\s",""); 

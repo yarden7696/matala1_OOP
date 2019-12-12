@@ -45,44 +45,67 @@ import com.google.gson.Gson;
  		f.drawFunctions("function_file.txt");
  	}
 	
+     /**
+      * this method add the function arg0 to the end of the array list.
+      */
 	@Override
 	public boolean add(function arg0) {
 	return functions.add(arg0);
 	}
 
+	
+	/**
+	 * this method get collection of functions and add them in the end of the current collection.
+	 */
 	@Override
 	public boolean addAll(Collection<? extends function> arg0) {
 		return functions.addAll(arg0);
 	}
 
+	/**
+	 * this method remove the all elements in the list.
+	 */
 	@Override
 	public void clear() {
 	functions.clear();
 		
 	}
 
+	/**
+	 * this method check if arg0 object exist in the list.
+	 */
 	@Override
 	public boolean contains(Object arg0) {
 		return functions.contains(arg0);
 	}
 
+	/**
+	 * this method check if c collection exist in the list.
+	 */
 	@Override
 	public boolean containsAll(Collection<?> c) {
 		return functions.containsAll(c);
 	}
 
+	/**
+	 * this method return true if the list is empty and if it's not return false.
+	 */
 	@Override
 	public boolean isEmpty() {
 		return functions.isEmpty();
 	}
 
+	
+	/**
+	 * Iterator function for functions.
+	 */
 	@Override
 	public Iterator<function> iterator() {
 		return functions.iterator();
 	}
 
 	/**
-	 * this method remove an object from the array list
+	 * this method remove o object from the array list.
 	 */
 	@Override
 	public boolean remove(Object o) {
@@ -91,7 +114,7 @@ import com.google.gson.Gson;
 
 	
 	/**
-	 * this method remove a collection of object 
+	 * this method remove a collection of objects.
 	 */
 	@Override
 	public boolean removeAll(Collection<?> c) {
@@ -99,7 +122,7 @@ import com.google.gson.Gson;
 	}
 
 	/**
-	 * this method is used to remove all the array list’s elements that are not contained in the specified collection 
+	 * this method is used to remove all the array list’s elements that are not contained in the specified collection.
 	 */
 	@Override
 	public boolean retainAll(Collection<?> c) {
@@ -107,7 +130,7 @@ import com.google.gson.Gson;
 	}
 
 	/**
-	 * this method returns the number of elements in the array list
+	 * this method returns the number of elements in the array list.
 	 */
 	@Override
 	public int size() {
@@ -126,7 +149,7 @@ import com.google.gson.Gson;
 
 	
 	/**
-	 * 
+	 * this method returns an array that contain the all elements in the array list In the right order.
 	 */
 	@Override
 	public <T> T[] toArray(T[] a) {
@@ -134,6 +157,10 @@ import com.google.gson.Gson;
 		return fun;
 	}
 
+	
+	/**
+	 * this method initializes a collection of functions from a file.
+	 */
 	@Override
 	public void initFromFile(String file) throws IOException {
 		BufferedReader br= null;
@@ -163,6 +190,10 @@ import com.google.gson.Gson;
 		}	
 	}
 
+	
+	/**
+	 * this method Saves the entire array list of functions in a file.
+	 */
 	@Override
 	public void saveToFile(String file) throws IOException {
 		File f= new File (file);
@@ -186,6 +217,10 @@ import com.google.gson.Gson;
 	}
 	}
 
+	
+	/**
+	 * This method draws in a GUI window the all graphs of functions that are in the collection.
+	 */
 	@Override
 	public void drawFunctions(int width, int height, Range rx, Range ry, int resolution) {
 		
@@ -234,6 +269,7 @@ import com.google.gson.Gson;
 		}
 		
 		////////y axis
+		
 		StdDraw.line(x[res/2], ry.get_min(), x[res/2], ry.get_max());
 		for (double i = ry.get_min(); i <= ry.get_max(); i=i+1) {
 		StdDraw.text(x[res/2]-0.07, i+0.07, Double.toString(i));
@@ -253,6 +289,10 @@ import com.google.gson.Gson;
 	
 	}
 
+	
+	/**
+	 * This method draws in a GUI window the all graphs of functions that are in the collection, using the given json file.
+	 */
 	@Override
 	public void drawFunctions(String json_file) {
 

@@ -408,6 +408,10 @@ public class Polynom implements Polynom_able{
 			return ans;
 		}
 	}
+	
+	/**
+	 * this function become the polynom string to an object function
+	 */
 	@Override
 	public function initFromString(String s) {
 		function p=new Polynom (s);
@@ -415,7 +419,7 @@ public class Polynom implements Polynom_able{
 	}
 	
 	
-
+     //private function thats remove space in a given string.
 	 private String removeSpace(String str) 
    { 
        str = str.replaceAll("\\s",""); 
