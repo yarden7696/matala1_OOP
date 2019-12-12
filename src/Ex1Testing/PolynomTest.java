@@ -181,15 +181,6 @@ class PolynomTest {
 	    	double actual=p1.root(x[i], x[i+1], 0.001);
 			assertEquals(expected[i], actual);
 		}
-	    try 
-	    {
-	    	p1.root(1, 4, 0.001);//f(x0)* f(x1) must be bigger from 0
-	    	fail();
-	    }
-		catch (Exception e) 
-		{
-			e.printStackTrace();
-		}
 	}
 
 	@Test
