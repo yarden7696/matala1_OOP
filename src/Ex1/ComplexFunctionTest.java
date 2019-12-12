@@ -30,7 +30,7 @@ class ComplexFunctionTest {
 			{
 
 				ComplexFunction wrongCf=new ComplexFunction(wrongOp[i],l,r);
-				fail();
+				fail("jkj");
 			}
 			catch(Exception e)
 			{
