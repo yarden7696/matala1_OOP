@@ -206,6 +206,7 @@ class PolynomTest {
 			assertEquals(expected, actual);
 		}
 	}
+	
 	@Test
 	void testArea() {
 		String [] polynomActual= {"2x^2-x+1","x^4-2x^2+2","x+2"};
