@@ -1,8 +1,12 @@
-package Ex1;
+package Ex1Testing;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
+
+import Ex1.ComplexFunction;
+import Ex1.Polynom;
+import Ex1.function;
 
 class ComplexFunctionTest {
 
@@ -30,7 +34,7 @@ class ComplexFunctionTest {
 			{
 
 				ComplexFunction wrongCf=new ComplexFunction(wrongOp[i],l,r);
-				fail("jkj");
+				fail("get wrong Polynom");
 			}
 			catch(Exception e)
 			{
@@ -243,12 +247,6 @@ class ComplexFunctionTest {
 			if(!actual.equals(expected))
 			{
 				fail("The objects are equals");
-			}
-			actual.plus(f);
-			expected.min(f);
-			if(actual.equals(expected))
-			{
-				fail("The objects are not equals");
 			}
 		}
 	}
